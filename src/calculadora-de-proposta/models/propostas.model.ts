@@ -4,9 +4,9 @@ import { FonteDeEnergia } from '../enums/fonte-de-energia.enum';
 import { Submercado } from '../enums/submercado.enum';
 import { Cargas } from './cargas.model';
 import { Usuarios } from './usuarios.model';
-@Entity('PROPOSTAS')
+@Entity({ name: 'PROPOSTAS' })
 export class Propostas {
-  @PrimaryColumn({ type: 'number', name: 'ID' })
+  @PrimaryColumn({ type: 'int', name: 'ID' })
   id: number;
 
   @Column({ type: 'uuid', name: 'ID_PUBLICO' })
@@ -21,10 +21,10 @@ export class Propostas {
   @OneToMany((type) => Cargas, (cargas) => cargas.proposta)
   cargas: Cargas;
 
-  @Column({ type: 'enum', name: 'SUBMERCADO' })
+  @Column({ type: 'enum', enum: Submercado })
   submercado: Submercado;
 
-  @Column({ type: 'enum', name: 'FONTE_DE_ENERGIA' })
+  @Column({ type: 'enum', enum: FonteDeEnergia })
   fonteDeEnergia: FonteDeEnergia;
 
   @Column({ type: 'numeric', name: 'CONSUMO_TOTAL' })
