@@ -1,5 +1,6 @@
-import { Get } from '@nestjs/common';
+import { Get, Post } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
+import { CotratarPropostaDto } from '../dto/contratar-proposta-dto';
 
 @Controller('propostas')
 export class PropostasController {
@@ -7,4 +8,7 @@ export class PropostasController {
   GetAll() {
     return 'Hello World';
   }
+
+  @Post()
+  add(dto: CotratarPropostaDto) {}
 }

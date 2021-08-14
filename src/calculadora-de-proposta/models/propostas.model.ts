@@ -10,7 +10,7 @@ import { FonteDeEnergia } from '../enums/fonte-de-energia.enum';
 import { Submercado } from '../enums/submercado.enum';
 import { Cargas } from './cargas.model';
 import { Usuarios } from './usuarios.model';
-@Entity({ name: 'PROPOSTAS' })
+@Entity({ name: 'TB_PROPOSTAS' })
 export class Propostas {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   id: number;
@@ -25,7 +25,7 @@ export class Propostas {
   dataFim: Date;
 
   @OneToMany((type) => Cargas, (cargas) => cargas.proposta)
-  cargas: Cargas;
+  cargas: Cargas[];
 
   @Column({ type: 'enum', enum: Submercado, name: 'SUBMERCADO' })
   submercado: Submercado;
@@ -41,4 +41,18 @@ export class Propostas {
 
   @ManyToOne((type) => Usuarios, (usuario) => usuario.propostas)
   usuario: Usuarios;
+
+  constructor(
+    dataInicio: Date,
+    dataFim: Date,
+    cargas: Cargas[],
+    fonteDeEnergia: FonteDeEnergia,
+    submercado: Submercado,
+  ) {
+    this.dataInicio = dataInicio;
+    this.dataFim = dataFim;
+    this.cargas = cargas;
+    this.fonteDeEnergia = fonteDeEnergia;
+    this.submercado = submercado;
+  }
 }

@@ -20,5 +20,5 @@ export class Usuarios {
   senha: string;
 
   @OneToMany((type) => Propostas, (propostas) => propostas.usuario)
-  propostas: Propostas;
+  propostas: Propostas[];
 }

@@ -2,7 +2,7 @@ import { Guid } from 'guid-typescript';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Propostas } from './propostas.model';
 
-@Entity({ name: 'CARGAS' })
+@Entity({ name: 'TB_CARGAS' })
 export class Cargas {
   @PrimaryGeneratedColumn({ name: 'ID' })
   id: Guid;
