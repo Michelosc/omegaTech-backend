@@ -4,15 +4,28 @@ import { Propostas } from './propostas.model';
 
 @Entity({ name: 'TB_CARGAS' })
 export class Cargas {
-  @PrimaryGeneratedColumn({ name: 'ID' })
-  id: Guid;
+  @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
+  public id: number;
 
   @Column({ type: 'varchar', name: 'NOME_EMPRESA' })
-  nomeDaEmpresa: string;
+  public nomeDaEmpresa: string;
 
-  @Column({ type: 'varchar', name: 'CONSUMO' })
-  consumoKwh: number;
+  @Column({ type: 'numeric', name: 'CONSUMO' })
+  public consumoKwh: number;
 
   @ManyToOne((type) => Propostas, (proposta) => proposta.cargas)
-  proposta: Propostas;
+  public proposta: Propostas;
+
+  constructor(nomeDaEmpresa: string, consumoKwh: number) {
+    this.nomeDaEmpresa = nomeDaEmpresa;
+    this.consumoKwh = consumoKwh;
+  }
+
+  get NomeDaEmpresa() {
+    return this.nomeDaEmpresa;
+  }
+
+  get ConsumoKwh() {
+    return this.consumoKwh;
+  }
 }

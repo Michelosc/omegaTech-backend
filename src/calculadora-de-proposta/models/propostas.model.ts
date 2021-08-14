@@ -13,34 +13,34 @@ import { Usuarios } from './usuarios.model';
 @Entity({ name: 'TB_PROPOSTAS' })
 export class Propostas {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
-  id: number;
+  public id: number;
 
   @Column({ type: 'uuid', name: 'ID_PUBLICO' })
-  idPublico: Guid;
+  public idPublico: string;
 
   @Column({ type: 'date', name: 'DATA_INICIO' })
-  dataInicio: Date;
+  public dataInicio: Date;
 
   @Column({ type: 'date', name: 'DATA_FIM' })
-  dataFim: Date;
+  public dataFim: Date;
 
   @OneToMany((type) => Cargas, (cargas) => cargas.proposta)
-  cargas: Cargas[];
+  public cargas: Cargas[];
 
   @Column({ type: 'enum', enum: Submercado, name: 'SUBMERCADO' })
-  submercado: Submercado;
+  public submercado: Submercado;
 
   @Column({ type: 'enum', enum: FonteDeEnergia, name: 'FONTE_DE_ENERGIA' })
-  fonteDeEnergia: FonteDeEnergia;
+  public fonteDeEnergia: FonteDeEnergia;
 
   @Column({ type: 'numeric', name: 'CONSUMO_TOTAL' })
-  consumoTotal: string;
+  public consumoTotal: number;
 
   @Column({ type: 'boolean', name: 'CONTRATADO' })
-  contratado: boolean;
+  public contratado: boolean;
 
   @ManyToOne((type) => Usuarios, (usuario) => usuario.propostas)
-  usuario: Usuarios;
+  public usuario: Usuarios;
 
   constructor(
     dataInicio: Date,
@@ -49,10 +49,17 @@ export class Propostas {
     fonteDeEnergia: FonteDeEnergia,
     submercado: Submercado,
   ) {
+    this.idPublico = Guid.create().toString();
     this.dataInicio = dataInicio;
     this.dataFim = dataFim;
     this.cargas = cargas;
     this.fonteDeEnergia = fonteDeEnergia;
     this.submercado = submercado;
+    this.contratado = false;
+    this.consumoTotal = 0;
+  }
+
+  defineConsumoTotal(value: number) {
+    this.consumoTotal = value;
   }
 }

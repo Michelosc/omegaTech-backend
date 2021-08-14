@@ -5,7 +5,7 @@ import { Cargas } from '../models/cargas.model';
 export class CriarPropostaDto {
   dataInicio: Date;
   dataFim: Date;
-  carga: Cargas;
+  cargas: Cargas[];
   submercado: Submercado;
   fonteDeEnergia: FonteDeEnergia;
 }

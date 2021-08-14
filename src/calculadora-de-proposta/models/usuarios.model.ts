@@ -5,20 +5,20 @@ import { Propostas } from './propostas.model';
 @Entity({ name: 'TB_USUARIOS' })
 export class Usuarios {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
-  id: number;
+  public id: number;
 
   @Column({ type: 'uuid', name: 'ID_PUBLICO' })
-  idPublico: Guid;
+  public idPublico: Guid;
 
   @Column({ type: 'varchar', name: 'NOME' })
-  nome: string;
+  public nome: string;
 
   @Column({ type: 'varchar', name: 'EMAIL' })
-  email: string;
+  public email: string;
 
   @Column({ type: 'varchar', name: 'SENHA' })
-  senha: string;
+  public senha: string;
 
   @OneToMany((type) => Propostas, (propostas) => propostas.usuario)
-  propostas: Propostas[];
+  public propostas: Propostas[];
 }
