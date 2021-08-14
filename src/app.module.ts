@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { UsuariosModule } from './usuario/usuarios.module';
-import { PropostasModule } from './propostas/propostas.module';
+import { CalculadoraDePropostaModule } from './calculadora-de-proposta/calculadora-de-proposta.module';
 
 @Module({
-  imports: [UsuariosModule, PropostasModule],
+  imports: [CalculadoraDePropostaModule],
 })
 export class AppModule {}
