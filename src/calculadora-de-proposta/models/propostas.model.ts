@@ -6,12 +6,13 @@ import { Usuarios } from './usuarios.model';
 
 export class Propostas {
   id: string;
-  id_publico: Guid;
+  idPublico: Guid;
   dataInicio: Date;
   dataFim: Date;
-  carga: Cargas;
+  cargas: Cargas;
   submercado: Submercado;
   fonteDeEnergia: FonteDeEnergia;
-  status: boolean;
+  consumoTotal: string;
+  contratado: boolean;
   usuario: Usuarios;
 }
