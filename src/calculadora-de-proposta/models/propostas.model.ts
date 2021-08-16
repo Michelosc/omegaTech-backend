@@ -40,7 +40,9 @@ export class Propostas {
   @Column({ type: 'boolean', name: 'CONTRATADO' })
   public contratado: boolean;
 
-  @ManyToOne((type) => Usuarios, (usuario) => usuario.propostas)
+  @ManyToOne((type) => Usuarios, (usuario) => usuario.propostas, {
+    eager: false,
+  })
   public usuario: Usuarios;
 
   constructor(

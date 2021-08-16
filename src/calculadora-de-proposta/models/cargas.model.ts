@@ -16,7 +16,9 @@ export class Cargas {
   @Column({ type: 'numeric', name: 'CONSUMO' })
   public consumoKwh: number;
 
-  @ManyToOne((type) => Propostas, (proposta) => proposta.cargas)
+  @ManyToOne((type) => Propostas, (proposta) => proposta.cargas, {
+    eager: false,
+  })
   public proposta: Propostas;
 
   constructor(nomeDaEmpresa: string, consumoKwh: number) {
