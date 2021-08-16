@@ -7,6 +7,9 @@ export class Cargas {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   public id: number;
 
+  @Column({ type: 'uuid', name: 'ID_PUBLICO' })
+  public idPublico: string;
+
   @Column({ type: 'varchar', name: 'NOME_EMPRESA' })
   public nomeDaEmpresa: string;
 

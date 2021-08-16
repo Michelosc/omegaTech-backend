@@ -2,6 +2,7 @@ import { Guid } from 'guid-typescript';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -9,7 +10,7 @@ import {
 import { FonteDeEnergia } from '../enums/fonte-de-energia.enum';
 import { Submercado } from '../enums/submercado.enum';
 import { Cargas } from './cargas.model';
-import { Usuarios } from './usuarios.model';
+import { Usuarios } from '../../auth/models/usuarios.model';
 @Entity({ name: 'TB_PROPOSTAS' })
 export class Propostas {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })

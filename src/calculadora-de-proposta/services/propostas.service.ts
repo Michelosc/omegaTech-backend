@@ -38,5 +38,6 @@ export class PropostasService {
     });
     proposta.defineConsumoTotal(total);
     this.repository.save(proposta);
+    return proposta;
   }
 }

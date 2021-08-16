@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Usuarios } from '../models/usuarios.model';
 
 @Injectable()
-export class UsuariosService {
+export class AuthService {
   constructor(
     @InjectRepository(Usuarios) private repository: Repository<Usuarios>,
   ) {}
