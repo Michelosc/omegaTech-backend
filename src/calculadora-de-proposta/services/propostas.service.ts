@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getConnection, getRepository, Repository } from 'typeorm';
+import { ContratarPropostaDto } from '../dto/contratar-proposta-dto';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
 import { Propostas } from '../models/propostas.model';
@@ -11,14 +12,16 @@ export class PropostasService {
     @InjectRepository(Propostas) private repository: Repository<Propostas>,
   ) {}
 
-  async findAll(): Promise<Propostas[]> {
+  async findAllPropostas(): Promise<Propostas[]> {
     return await this.repository.find();
   }
 
-  async findOne(id: string): Promise<Propostas> {
-    const p = await this.repository.findOne({ id });
-
-    return p;
+  async getPropostas(idPublico: string): Promise<Propostas> {
+    const encontrado = await this.repository.findOne({ idPublico });
+    if (!encontrado) {
+      throw new NotFoundException(`Proposta de ID${idPublico} não existe.`);
+    }
+    return encontrado;
   }
 
   async add(dto: CriarPropostaDto): Promise<Propostas> {
@@ -49,5 +52,18 @@ export class PropostasService {
     proposta.cargas = [...carga];
 
     return await this.repository.manager.save(proposta);
+  }
+
+  async update(idPublico: string, contratado: boolean): Promise<Propostas> {
+    const proposta = await this.getPropostas(idPublico);
+
+    proposta.contratado = contratado;
+    await this.repository.save(proposta);
+    return proposta;
+  }
+
+  async remove(idPublico: string): Promise<void> {
+    const resultado = await this.getPropostas(idPublico);
+    await this.repository.remove(resultado);
   }
 }
