@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import console from 'node:console';
 import { getConnection, getRepository, Repository } from 'typeorm';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
@@ -31,11 +32,16 @@ export class PropostasService {
 
     const cargas = dto.cargas;
 
+    const carga: Cargas[] = [];
+
     for (let i = 0; i < cargas.length; i++) {
-      proposta.cargas = await getRepository(Cargas).find({
+      let c = await getRepository(Cargas).find({
         nomeDaEmpresa: `${cargas[i].nomeDaEmpresa}`,
       });
+      carga.push(c[0]);
     }
+
+    proposta.cargas = [...carga];
 
     return await this.repository.manager.save(proposta);
   }

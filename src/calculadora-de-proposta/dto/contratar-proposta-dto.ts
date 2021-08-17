@@ -1,3 +1,3 @@
-export class CotratarPropostaDto {
+export class ContratarPropostaDto {
   contratado: boolean;
 }
