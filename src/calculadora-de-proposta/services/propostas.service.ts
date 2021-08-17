@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import console from 'node:console';
 import { getConnection, getRepository, Repository } from 'typeorm';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
@@ -35,9 +34,15 @@ export class PropostasService {
     const carga: Cargas[] = [];
 
     for (let i = 0; i < cargas.length; i++) {
-      let c = await getRepository(Cargas).find({
+      const c = await getRepository(Cargas).find({
         nomeDaEmpresa: `${cargas[i].nomeDaEmpresa}`,
       });
+
+      if (c.length <= 0) {
+        throw new NotFoundException(
+          `Carga inexistente favor informar uma carga válida`,
+        );
+      }
       carga.push(c[0]);
     }
 
