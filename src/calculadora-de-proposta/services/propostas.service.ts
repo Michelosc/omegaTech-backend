@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getConnection, getRepository, Repository } from 'typeorm';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
 import { Propostas } from '../models/propostas.model';
@@ -11,34 +11,32 @@ export class PropostasService {
     @InjectRepository(Propostas) private repository: Repository<Propostas>,
   ) {}
 
-  findAll(): Promise<Propostas[]> {
-    return this.repository.find();
+  async findAll(): Promise<Propostas[]> {
+    return await this.repository.find();
   }
 
-  add(dto: CriarPropostaDto) {
-    const cargas: Cargas[] = dto.cargas;
-    const cargasArray: Cargas[] = [];
-    console.log(cargas);
+  async findOne(id: string): Promise<Propostas> {
+    const p = await this.repository.findOne({ id });
 
-    // cargas.map((c) => {
-    //   const nomeDaEmpresa = c.nomeDaEmpresa;
-    //   const consumoKwh = c.consumoKwh;
-    //   const carga = new Cargas(nomeDaEmpresa, consumoKwh);
-    //   cargasArray.push(carga);
-    // });
-    // const proposta = new Propostas(
-    //   dto.dataInicio,
-    //   dto.dataFim,
-    //   cargasArray,
-    //   dto.fonteDeEnergia,
-    //   dto.submercado,
-    // );
-    // let total = 0;
-    // cargasArray.map((c) => {
-    //   total += c.ConsumoKwh;
-    // });
-    // proposta.defineConsumoTotal(total);
-    // this.repository.save(proposta);
-    // return proposta;
+    return p;
+  }
+
+  async add(dto: CriarPropostaDto): Promise<Propostas> {
+    const proposta = new Propostas(
+      dto.dataInicio,
+      dto.dataFim,
+      dto.fonteDeEnergia,
+      dto.submercado,
+    );
+
+    const cargas = dto.cargas;
+
+    for (let i = 0; i < cargas.length; i++) {
+      proposta.cargas = await getRepository(Cargas).find({
+        nomeDaEmpresa: `${cargas[i].nomeDaEmpresa}`,
+      });
+    }
+
+    return await this.repository.manager.save(proposta);
   }
 }

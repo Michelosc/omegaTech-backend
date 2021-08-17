@@ -18,7 +18,4 @@ export class Usuarios {
 
   @Column({ type: 'varchar', name: 'SENHA' })
   public senha: string;
-
-  @OneToMany((type) => Propostas, (propostas) => propostas.usuario)
-  public propostas: Propostas[];
 }

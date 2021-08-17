@@ -3,8 +3,9 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { FonteDeEnergia } from '../enums/fonte-de-energia.enum';
@@ -13,8 +14,8 @@ import { Cargas } from './cargas.model';
 import { Usuarios } from '../../auth/models/usuarios.model';
 @Entity({ name: 'TB_PROPOSTAS' })
 export class Propostas {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
-  public id: number;
+  @PrimaryGeneratedColumn({ name: 'ID' })
+  public id: string;
 
   @Column({ type: 'uuid', name: 'ID_PUBLICO' })
   public idPublico: string;
@@ -25,7 +26,10 @@ export class Propostas {
   @Column({ type: 'date', name: 'DATA_FIM' })
   public dataFim: Date;
 
-  @OneToMany((type) => Cargas, (cargas) => cargas.proposta)
+  @ManyToMany((type) => Cargas, (cargas) => cargas.propostas, {
+    eager: true,
+  })
+  @JoinTable()
   public cargas: Cargas[];
 
   @Column({ type: 'enum', enum: Submercado, name: 'SUBMERCADO' })
@@ -40,22 +44,15 @@ export class Propostas {
   @Column({ type: 'boolean', name: 'CONTRATADO' })
   public contratado: boolean;
 
-  @ManyToOne((type) => Usuarios, (usuario) => usuario.propostas, {
-    eager: false,
-  })
-  public usuario: Usuarios;
-
   constructor(
     dataInicio: Date,
     dataFim: Date,
-    cargas: Cargas[],
     fonteDeEnergia: FonteDeEnergia,
     submercado: Submercado,
   ) {
     this.idPublico = Guid.create().toString();
     this.dataInicio = dataInicio;
     this.dataFim = dataFim;
-    this.cargas = cargas;
     this.fonteDeEnergia = fonteDeEnergia;
     this.submercado = submercado;
     this.contratado = false;

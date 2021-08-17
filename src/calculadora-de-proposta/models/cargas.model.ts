@@ -1,11 +1,18 @@
 import { Guid } from 'guid-typescript';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
 import { Propostas } from './propostas.model';
 
 @Entity({ name: 'TB_CARGAS' })
 export class Cargas {
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
-  public id: number;
+  public id: string;
 
   @Column({ type: 'uuid', name: 'ID_PUBLICO' })
   public idPublico: string;
@@ -16,21 +23,14 @@ export class Cargas {
   @Column({ type: 'numeric', name: 'CONSUMO' })
   public consumoKwh: number;
 
-  @ManyToOne((type) => Propostas, (proposta) => proposta.cargas, {
-    eager: false,
+  @ManyToMany((type) => Propostas, (propostas) => propostas.cargas, {
+    cascade: true,
   })
-  public proposta: Propostas;
+  propostas: Propostas[];
 
   constructor(nomeDaEmpresa: string, consumoKwh: number) {
+    this.idPublico = Guid.create().toString();
     this.nomeDaEmpresa = nomeDaEmpresa;
     this.consumoKwh = consumoKwh;
-  }
-
-  get NomeDaEmpresa() {
-    return this.nomeDaEmpresa;
-  }
-
-  get ConsumoKwh() {
-    return this.consumoKwh;
   }
 }
