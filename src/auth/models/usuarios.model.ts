@@ -8,7 +8,7 @@ export class Usuarios {
   public id: number;
 
   @Column({ type: 'uuid', name: 'ID_PUBLICO' })
-  public idPublico: Guid;
+  public idPublico: string;
 
   @Column({ type: 'varchar', name: 'NOME' })
   public nome: string;
@@ -18,4 +18,14 @@ export class Usuarios {
 
   @Column({ type: 'varchar', name: 'SENHA' })
   public senha: string;
+
+  public propostas: Propostas[];
+
+  constructor(nome: string, email: string, senha: string) {
+    this.idPublico = Guid.create().toString();
+    this.nome = nome;
+    this.email = email;
+    this.senha = senha;
+    this.propostas = [];
+  }
 }
