@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  MethodNotAllowedException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,6 +9,7 @@ import { getRepository, Repository } from 'typeorm';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
 import { Propostas } from '../models/propostas.model';
+import * as moment from 'moment';
 
 @Injectable()
 export class PropostasService {
@@ -16,7 +18,7 @@ export class PropostasService {
   ) {}
 
   async findAllPropostas(): Promise<Propostas[]> {
-    return await this.repository.find();
+    return await this.repository.find({ order: { id: 'DESC' } });
   }
 
   async getPropostas(idPublico: string): Promise<Propostas> {
@@ -53,11 +55,13 @@ export class PropostasService {
       carga.push(c[0]);
     }
 
-    // if (dto.dataInicio < hoje) {
-    //   throw new BadRequestException(
-    //     'Data início deve ser maior que a data atual',
-    //   );
-    // }
+    const verificaDataInico = moment().isAfter(dto.dataInicio);
+
+    if (verificaDataInico) {
+      throw new BadRequestException(
+        'Data início deve ser maior que a data atual',
+      );
+    }
 
     if (dto.dataFim < dto.dataInicio) {
       throw new BadRequestException('Data fim deve ser maior que data início');
@@ -70,7 +74,11 @@ export class PropostasService {
 
   async update(idPublico: string, contratado: boolean): Promise<Propostas> {
     const proposta = await this.getPropostas(idPublico);
-
+    if (proposta.contratado) {
+      throw new MethodNotAllowedException(
+        'A proposta não pode ser contratada pois já está contratada.',
+      );
+    }
     proposta.contratado = contratado;
     await this.repository.save(proposta);
     return proposta;
@@ -78,6 +86,11 @@ export class PropostasService {
 
   async remove(idPublico: string): Promise<void> {
     const resultado = await this.getPropostas(idPublico);
+    if (resultado.contratado) {
+      throw new MethodNotAllowedException(
+        'A proposta não pode ser excluída pois está contratada.',
+      );
+    }
     await this.repository.remove(resultado);
   }
 }
