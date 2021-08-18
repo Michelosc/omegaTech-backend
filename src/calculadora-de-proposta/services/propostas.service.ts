@@ -1,7 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getConnection, getRepository, Repository } from 'typeorm';
-import { ContratarPropostaDto } from '../dto/contratar-proposta-dto';
+import { getRepository, Repository } from 'typeorm';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
 import { Propostas } from '../models/propostas.model';
@@ -46,7 +49,18 @@ export class PropostasService {
           `Carga inexistente favor informar uma carga válida`,
         );
       }
+
       carga.push(c[0]);
+    }
+
+    // if (dto.dataInicio < hoje) {
+    //   throw new BadRequestException(
+    //     'Data início deve ser maior que a data atual',
+    //   );
+    // }
+
+    if (dto.dataFim < dto.dataInicio) {
+      throw new BadRequestException('Data fim deve ser maior que data início');
     }
 
     proposta.cargas = [...carga];
