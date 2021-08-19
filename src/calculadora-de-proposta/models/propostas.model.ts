@@ -45,6 +45,11 @@ export class Propostas {
   @Column({ type: 'boolean', name: 'CONTRATADO' })
   public contratado: boolean;
 
+  @ManyToOne((type) => Usuarios, (usuarios) => usuarios.propostas, {
+    eager: false,
+  })
+  public usuario: Usuarios;
+
   constructor(
     dataInicio: Date,
     dataFim: Date,
@@ -70,5 +75,8 @@ export class Propostas {
     const dataFim = moment(this.dataFim);
     const totalDeHoras = dataFim.diff(dataInicio, 'hours');
     console.log(totalDeHoras);
+
+    const tempoDeContrato = dataFim.diff(dataInicio, 'years');
+    console.log(tempoDeContrato);
   }
 }

@@ -10,6 +10,7 @@ import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Cargas } from '../models/cargas.model';
 import { Propostas } from '../models/propostas.model';
 import * as moment from 'moment';
+import { Usuarios } from 'src/auth/models/usuarios.model';
 
 @Injectable()
 export class PropostasService {
@@ -29,13 +30,15 @@ export class PropostasService {
     return encontrado;
   }
 
-  async add(dto: CriarPropostaDto): Promise<Propostas> {
+  async add(dto: CriarPropostaDto, usuario: Usuarios): Promise<Propostas> {
     const proposta = new Propostas(
       dto.dataInicio,
       dto.dataFim,
       dto.fonteDeEnergia,
       dto.submercado,
     );
+
+    proposta.usuario = usuario;
 
     const cargasDoDto = dto.cargas;
 

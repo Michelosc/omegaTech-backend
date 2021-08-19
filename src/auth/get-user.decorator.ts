@@ -4,6 +4,6 @@ import { Usuarios } from './models/usuarios.model';
 export const GetUser = createParamDecorator(
   (data, ctx: ExecutionContext): Usuarios => {
     const req = ctx.switchToHttp().getRequest();
-    return req.usuarios;
+    return req.user;
   },
 );

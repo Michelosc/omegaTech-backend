@@ -3,6 +3,8 @@ import { Patch } from '@nestjs/common';
 import { Param } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { Usuarios } from 'src/auth/models/usuarios.model';
 import { ContratarPropostaDto } from '../dto/contratar-proposta-dto';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Propostas } from '../models/propostas.model';
@@ -24,8 +26,11 @@ export class PropostasController {
   }
 
   @Post()
-  add(@Body() dto: CriarPropostaDto) {
-    return this.service.add(dto);
+  add(
+    @Body() dto: CriarPropostaDto,
+    @GetUser() usuario: Usuarios,
+  ): Promise<Propostas> {
+    return this.service.add(dto, usuario);
   }
 
   @Patch('/:id')
