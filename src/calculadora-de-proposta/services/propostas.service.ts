@@ -37,22 +37,22 @@ export class PropostasService {
       dto.submercado,
     );
 
-    const cargas = dto.cargas;
+    const cargasDoDto = dto.cargas;
 
     const carga: Cargas[] = [];
 
-    for (let i = 0; i < cargas.length; i++) {
-      const c = await getRepository(Cargas).find({
-        nomeDaEmpresa: `${cargas[i].nomeDaEmpresa}`,
+    for (let i = 0; i < cargasDoDto.length; i++) {
+      const cargaDoRepositorio = await getRepository(Cargas).find({
+        nomeDaEmpresa: `${cargasDoDto[i].nomeDaEmpresa}`,
       });
 
-      if (c.length <= 0) {
+      if (cargaDoRepositorio.length <= 0) {
         throw new NotFoundException(
           `Carga inexistente favor informar uma carga válida`,
         );
       }
 
-      carga.push(c[0]);
+      carga.push(cargaDoRepositorio[0]);
     }
 
     const verificaDataInico = moment().isAfter(dto.dataInicio);
@@ -68,6 +68,8 @@ export class PropostasService {
     }
 
     proposta.cargas = [...carga];
+
+    proposta.defineConsumoTotal();
 
     return await this.repository.manager.save(proposta);
   }

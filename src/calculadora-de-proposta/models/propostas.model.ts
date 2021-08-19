@@ -12,6 +12,7 @@ import { FonteDeEnergia } from '../enums/fonte-de-energia.enum';
 import { Submercado } from '../enums/submercado.enum';
 import { Cargas } from './cargas.model';
 import { Usuarios } from '../../auth/models/usuarios.model';
+import * as moment from 'moment';
 @Entity({ name: 'TB_PROPOSTAS' })
 export class Propostas {
   @PrimaryGeneratedColumn({ name: 'ID' })
@@ -60,6 +61,14 @@ export class Propostas {
   }
 
   defineConsumoTotal(): void {
-    //this.dataFim.diff(this.dataInicio);
+    let consumoTotalDasCargas = 0;
+    this.cargas.map((c) => {
+      consumoTotalDasCargas += +c.consumoKwh;
+    });
+    console.log(consumoTotalDasCargas);
+    const dataInicio = moment(this.dataInicio);
+    const dataFim = moment(this.dataFim);
+    const totalDeHoras = dataFim.diff(dataInicio, 'hours');
+    console.log(totalDeHoras);
   }
 }
