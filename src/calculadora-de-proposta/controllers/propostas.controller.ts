@@ -1,12 +1,14 @@
-import { Body, Delete, Get, Post } from '@nestjs/common';
+import { Body, Delete, Get, Post, UseGuards } from '@nestjs/common';
 import { Patch } from '@nestjs/common';
 import { Param } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ContratarPropostaDto } from '../dto/contratar-proposta-dto';
 import { CriarPropostaDto } from '../dto/criar-proposta-dto';
 import { Propostas } from '../models/propostas.model';
 import { PropostasService } from '../services/propostas.service';
 
+@UseGuards(AuthGuard())
 @Controller('propostas')
 export class PropostasController {
   constructor(private service: PropostasService) {}

@@ -6,11 +6,14 @@ import { CriarUsuarioDto } from '../dto/criar-usuario-dto';
 import { Usuarios } from '../models/usuarios.model';
 import * as bcrypt from 'bcrypt';
 import { LoginUsuarioDto } from '../dto/login-usuario-dto';
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from '../jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(Usuarios) private repository: Repository<Usuarios>,
+    private jwtService: JwtService,
   ) {}
 
   async criarUsuario(dto: CriarUsuarioDto): Promise<void> {
@@ -32,12 +35,14 @@ export class AuthService {
     await this.repository.save(usuario);
   }
 
-  async login(dto: LoginUsuarioDto): Promise<string> {
+  async login(dto: LoginUsuarioDto): Promise<{ accessToken: string }> {
     const { email, senha } = dto;
     const usuario = await this.repository.findOne({ email });
 
-    if (usuario && (await bcrypt.compare(usuario, usuario.senha))) {
-      return 'sucesso';
+    if (usuario && (await bcrypt.compare(senha, usuario.senha))) {
+      const payload: JwtPayload = { email };
+      const accessToken: string = await this.jwtService.sign(payload);
+      return { accessToken };
     } else {
       throw new UnauthorizedException('Por favor, cheque seu email e senha.');
     }

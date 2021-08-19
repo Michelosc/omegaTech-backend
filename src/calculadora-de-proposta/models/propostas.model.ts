@@ -59,7 +59,7 @@ export class Propostas {
     this.consumoTotal = 0;
   }
 
-  defineConsumoTotal(value: number) {
-    this.consumoTotal = value;
+  defineConsumoTotal(): void {
+    //this.dataFim.diff(this.dataInicio);
   }
 }
