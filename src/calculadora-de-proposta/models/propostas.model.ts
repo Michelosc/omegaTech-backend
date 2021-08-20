@@ -128,19 +128,10 @@ export class Propostas {
       +totalDeHoras *
       (+precoKw + (+taxaSubmercado + +taxaFonteDeEnergia));
 
-    console.log('consumoTotalDasCargas: ' + consumoTotalDasCargas);
-    console.log('totalDeHoras: ' + totalDeHoras);
-    console.log('preçoKw: ' + precoKw);
-    console.log('taxaSubmercado: ' + taxaSubmercado);
-    console.log('taxaFonteDeEnergia: ' + taxaFonteDeEnergia);
-
-    console.log(valorTotal);
-
     const incentivo = tempoDeContrato - 3;
 
     if (tempoDeContrato > 3) {
       this.valorDaProposta = (valorTotal / 100) * incentivo;
-      console.log(this.valorDaProposta);
       return;
     }
 
