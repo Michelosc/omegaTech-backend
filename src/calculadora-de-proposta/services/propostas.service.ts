@@ -18,12 +18,26 @@ export class PropostasService {
     @InjectRepository(Propostas) private repository: Repository<Propostas>,
   ) {}
 
-  async findAllPropostas(): Promise<Propostas[]> {
-    return await this.repository.find({ order: { id: 'DESC' } });
+  async findAllPropostas(usuario: Usuarios): Promise<Propostas[]> {
+    const propostas = await this.repository.find({ usuario });
+
+    const propostasDecrescentes = propostas.sort((b, a) => {
+      if (a.id > b.id) {
+        return 1;
+      }
+      if (a.id < b.id) {
+        return -1;
+      }
+      return 0;
+    });
+
+    return propostasDecrescentes;
   }
 
-  async getPropostas(idPublico: string): Promise<Propostas> {
-    const encontrado = await this.repository.findOne({ idPublico });
+  async getPropostas(idPublico: string, usuario: Usuarios): Promise<Propostas> {
+    const encontrado = await this.repository.findOne({
+      where: { idPublico, usuario },
+    });
     if (!encontrado) {
       throw new NotFoundException(`Proposta de ID${idPublico} não existe.`);
     }
@@ -77,8 +91,12 @@ export class PropostasService {
     return await this.repository.manager.save(proposta);
   }
 
-  async update(idPublico: string, contratado: boolean): Promise<Propostas> {
-    const proposta = await this.getPropostas(idPublico);
+  async update(
+    idPublico: string,
+    contratado: boolean,
+    usuario: Usuarios,
+  ): Promise<Propostas> {
+    const proposta = await this.getPropostas(idPublico, usuario);
     if (proposta.contratado) {
       throw new MethodNotAllowedException(
         'A proposta não pode ser contratada pois já está contratada.',
@@ -89,8 +107,8 @@ export class PropostasService {
     return proposta;
   }
 
-  async remove(idPublico: string): Promise<void> {
-    const resultado = await this.getPropostas(idPublico);
+  async remove(idPublico: string, usuario: Usuarios): Promise<void> {
+    const resultado = await this.getPropostas(idPublico, usuario);
     if (resultado.contratado) {
       throw new MethodNotAllowedException(
         'A proposta não pode ser excluída pois está contratada.',

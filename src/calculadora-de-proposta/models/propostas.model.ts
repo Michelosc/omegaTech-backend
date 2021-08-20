@@ -13,8 +13,10 @@ import { Submercado } from '../enums/submercado.enum';
 import { Cargas } from './cargas.model';
 import { Usuarios } from '../../auth/models/usuarios.model';
 import * as moment from 'moment';
+import { Exclude } from 'class-transformer';
 @Entity({ name: 'TB_PROPOSTAS' })
 export class Propostas {
+  @Exclude({ toPlainOnly: true })
   @PrimaryGeneratedColumn({ name: 'ID' })
   public id: string;
 
@@ -48,6 +50,7 @@ export class Propostas {
   @ManyToOne((type) => Usuarios, (usuarios) => usuarios.propostas, {
     eager: false,
   })
+  @Exclude({ toPlainOnly: true })
   public usuario: Usuarios;
 
   constructor(
@@ -70,13 +73,55 @@ export class Propostas {
     this.cargas.map((c) => {
       consumoTotalDasCargas += +c.consumoKwh;
     });
-    console.log(consumoTotalDasCargas);
+
     const dataInicio = moment(this.dataInicio);
     const dataFim = moment(this.dataFim);
     const totalDeHoras = dataFim.diff(dataInicio, 'hours');
-    console.log(totalDeHoras);
-
     const tempoDeContrato = dataFim.diff(dataInicio, 'years');
-    console.log(tempoDeContrato);
+
+    let taxaSubmercado = 0;
+
+    const precoKw = 10;
+
+    switch (this.submercado) {
+      case 'NORTE':
+        taxaSubmercado = 2;
+        break;
+
+      case 'NORDESTE':
+        taxaSubmercado = -1;
+        break;
+
+      case 'SUL':
+        taxaSubmercado = 3.5;
+        break;
+
+      case 'SUDESTE':
+        taxaSubmercado = 1.5;
+        break;
+
+      case 'CENTROOESTE':
+        taxaSubmercado = 1.5;
+        break;
+    }
+
+    let taxaFonteDeEnergia = 0;
+
+    switch (this.fonteDeEnergia) {
+      case 'CONVENCIONAL':
+        taxaFonteDeEnergia = 5;
+        break;
+
+      case 'RENOVAVEL':
+        taxaFonteDeEnergia = -2;
+        break;
+    }
+
+    let calculoFinal =
+      consumoTotalDasCargas *
+      totalDeHoras *
+      (precoKw + (taxaSubmercado + taxaFonteDeEnergia));
+
+    this.consumoTotal = calculoFinal;
   }
 }

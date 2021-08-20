@@ -1,9 +1,11 @@
+import { Exclude } from 'class-transformer';
 import { Guid } from 'guid-typescript';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Propostas } from '../../calculadora-de-proposta/models/propostas.model';
 
 @Entity({ name: 'TB_USUARIOS' })
 export class Usuarios {
+  @Exclude({ toPlainOnly: true })
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   public id: string;
 

@@ -16,13 +16,16 @@ export class PropostasController {
   constructor(private service: PropostasService) {}
 
   @Get()
-  getAll() {
-    return this.service.findAllPropostas();
+  getAll(@GetUser() usuario: Usuarios) {
+    return this.service.findAllPropostas(usuario);
   }
 
   @Get('/:id')
-  getById(@Param('id') id: string): Promise<Propostas> {
-    return this.service.getPropostas(id);
+  getById(
+    @Param('id') id: string,
+    @GetUser() usuario: Usuarios,
+  ): Promise<Propostas> {
+    return this.service.getPropostas(id, usuario);
   }
 
   @Post()
@@ -34,14 +37,18 @@ export class PropostasController {
   }
 
   @Patch('/:id')
-  contratar(@Param('id') idPublico: string, @Body() dto: ContratarPropostaDto) {
+  contratar(
+    @Param('id') idPublico: string,
+    @Body() dto: ContratarPropostaDto,
+    @GetUser() usuario: Usuarios,
+  ) {
     const { contratado } = dto;
 
-    return this.service.update(idPublico, contratado);
+    return this.service.update(idPublico, contratado, usuario);
   }
 
   @Delete('/:id')
-  remover(@Param('id') idPublico: string) {
-    return this.service.remove(idPublico);
+  remover(@Param('id') idPublico: string, @GetUser() usuario: Usuarios) {
+    return this.service.remove(idPublico, usuario);
   }
 }

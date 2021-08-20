@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Guid } from 'guid-typescript';
 import {
   Column,
@@ -11,6 +12,7 @@ import { Propostas } from './propostas.model';
 
 @Entity({ name: 'TB_CARGAS' })
 export class Cargas {
+  @Exclude({ toPlainOnly: true })
   @PrimaryGeneratedColumn({ type: 'int', name: 'ID' })
   public id: string;
 

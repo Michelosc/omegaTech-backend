@@ -3,4 +3,5 @@ export enum Submercado {
   NORDESTE = 'NORDESTE',
   SUL = 'SUL',
   SUDESTE = 'SUDESTE',
+  CENTROOESTE = 'CENTROOESTE',
 }
