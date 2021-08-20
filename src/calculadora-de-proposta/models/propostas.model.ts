@@ -47,6 +47,9 @@ export class Propostas {
   @Column({ type: 'boolean', name: 'CONTRATADO' })
   public contratado: boolean;
 
+  @Column({ type: 'numeric', name: 'VALOR_DA_PROPOSTA' })
+  public valorDaProposta: number;
+
   @ManyToOne((type) => Usuarios, (usuarios) => usuarios.propostas, {
     eager: false,
   })
@@ -66,6 +69,7 @@ export class Propostas {
     this.submercado = submercado;
     this.contratado = false;
     this.consumoTotal = 0;
+    this.valorDaProposta = 0;
   }
 
   defineConsumoTotal(): void {
@@ -74,12 +78,14 @@ export class Propostas {
       consumoTotalDasCargas += +c.consumoKwh;
     });
 
+    this.consumoTotal = consumoTotalDasCargas;
+
     const dataInicio = moment(this.dataInicio);
     const dataFim = moment(this.dataFim);
     const totalDeHoras = dataFim.diff(dataInicio, 'hours');
     const tempoDeContrato = dataFim.diff(dataInicio, 'years');
 
-    let taxaSubmercado = 0;
+    let taxaSubmercado: number = 0;
 
     const precoKw = 10;
 
@@ -105,7 +111,7 @@ export class Propostas {
         break;
     }
 
-    let taxaFonteDeEnergia = 0;
+    let taxaFonteDeEnergia: number = 0;
 
     switch (this.fonteDeEnergia) {
       case 'CONVENCIONAL':
@@ -117,11 +123,27 @@ export class Propostas {
         break;
     }
 
-    let calculoFinal =
-      consumoTotalDasCargas *
-      totalDeHoras *
-      (precoKw + (taxaSubmercado + taxaFonteDeEnergia));
+    const valorTotal =
+      +consumoTotalDasCargas *
+      +totalDeHoras *
+      (+precoKw + (+taxaSubmercado + +taxaFonteDeEnergia));
 
-    this.consumoTotal = calculoFinal;
+    console.log('consumoTotalDasCargas: ' + consumoTotalDasCargas);
+    console.log('totalDeHoras: ' + totalDeHoras);
+    console.log('preçoKw: ' + precoKw);
+    console.log('taxaSubmercado: ' + taxaSubmercado);
+    console.log('taxaFonteDeEnergia: ' + taxaFonteDeEnergia);
+
+    console.log(valorTotal);
+
+    const incentivo = tempoDeContrato - 3;
+
+    if (tempoDeContrato > 3) {
+      this.valorDaProposta = (valorTotal / 100) * incentivo;
+      console.log(this.valorDaProposta);
+      return;
+    }
+
+    this.valorDaProposta = valorTotal;
   }
 }
