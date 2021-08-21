@@ -47,4 +47,8 @@ export class AuthService {
       throw new UnauthorizedException('Por favor, cheque seu email e senha.');
     }
   }
+
+  getToken(token) {
+    return token;
+  }
 }
