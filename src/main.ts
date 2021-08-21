@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import { TransformInterceptor } from './transform.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: false });
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
   const config = new DocumentBuilder()
