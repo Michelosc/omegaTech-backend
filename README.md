@@ -1,73 +1,77 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Projeto Final Omega Tech
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+O projeto foi desenvolvido para atender o desafio final do programa Omega Tech. 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Jornada do projeto
+O projeto foi desenvolvido para atender o desafio final do programa OmegaTech. Foi acordado com os membros da equipe que, como alguns não possuiam conhecimento técnico no back-end o membro Michel ficou responsável por atender essa parte do projeto desenvolvendo suas funcionalidades. Enquanto os outros membros ficaram responsáveis pelo front-end. 
 
-## Description
+## 🚀 Começando
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-## Installation
+Consulte **Implantação** para saber como implantar o projeto.
 
-```bash
-$ npm install
+### 📋 Pré-requisitos
+
+De que coisas você precisa para instalar o software e como instalá-lo?
+
+```
+Git
+NodeJs
 ```
 
-## Running the app
+### 🔧 Instalação
 
-```bash
-# development
-$ npm run start
+Para instalar as dependências do projeto você precisa rodar o comando:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+npm install
 ```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
+Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
 
-# test coverage
-$ npm run test:cov
+
+### ⌨️ E testes de estilo de codificação
+
+Explique que eles verificam esses testes e porquê.
+
+```
+Dar exemplos
 ```
 
-## Support
+## 📦 Desenvolvimento
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
-## Stay in touch
+## 🛠️ Construído com
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Mencione as ferramentas que você usou para criar seu projeto
 
-## License
+* [NestJs](http://https://nestjs.com/) - O framework web usado
+* [npm](https://https://www.npmjs.com/) - Gerente de Dependência
 
-Nest is [MIT licensed](LICENSE).
+
+## 🖇️ Colaborando
+
+Por favor, entre em contato por email para esse endereço de [email](micheloscbc@hotmail.com) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
+
+## ✒️ Autores
+
+* **Aurelianny Cunha**  - [Github](https://github.com/Aurelianny)
+* **Ícaro Régis**  - [Github](https://github.com/icaroregis)
+* **Michel de Oliveira Santos Corrêa**  - [Github](https://github.com/Michelosc)
+* **Roberto Neves**  - [Github](https://github.com/rsnows)
+
+
+## 📄 Licença
+
+Este projeto está sob a licença (MIT) - veja o arquivo [LICENSE.md](https://github.com/Michelosc/omegaTech-backend/blob/main/LICENSE) para detalhes.
+
+## 🎁 Expressões de gratidão
+
+* Primeiramente agradeço a minha esposa Ana Paula pela parceria e apoio durante essa academia.
+* Agradeço imensamente a GamaAcademy e a Omega Energia pela possibilidade de fazer parte dessa academia incrível. 
+* Agradeço ao professor Filipe Ceccon que através de suas aulas e coselhos ajudou a desenvolver esse projeto.
+* Agradeço ao mentor Hélio Costa que auxiliou com dicas e conselhos durante o desenvolviemnto desse projeto.
