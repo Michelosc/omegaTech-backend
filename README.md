@@ -9,7 +9,9 @@ O projeto foi desenvolvido para atender o desafio final do programa OmegaTech. F
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-Consulte **Implantação** para saber como implantar o projeto.
+```
+https://github.com/Michelosc/omegaTech-backend.git
+```
 
 ### 📋 Pré-requisitos
 
@@ -29,28 +31,13 @@ npm install
 ```
 
 
-
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
-
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-## 📦 Desenvolvimento
-
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
-
 ## 🛠️ Construído com
 
 Mencione as ferramentas que você usou para criar seu projeto
 
 * [NestJs](http://https://nestjs.com/) - O framework web usado
 * [npm](https://https://www.npmjs.com/) - Gerente de Dependência
+* .[momentjs].(https://momentjs.com/) - Biblioteca para manipulação de datas
 
 
 ## 🖇️ Colaborando
