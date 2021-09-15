@@ -1,6 +1,6 @@
 # Projeto Final Omega Tech
 
-O projeto foi desenvolvido para atender o desafio final do programa Omega Tech. 
+O projeto foi desenvolvido para atender o desafio final do programa Omega Tech. O projeto consiste em uma calculadora de proposta para serviço de prestação de energia.
 
 # Jornada do projeto
 O projeto foi desenvolvido para atender o desafio final do programa OmegaTech. Foi acordado com os membros da equipe que, como alguns não possuiam conhecimento técnico no back-end o membro Michel ficou responsável por atender essa parte do projeto desenvolvendo suas funcionalidades. Enquanto os outros membros ficaram responsáveis pelo front-end. 
@@ -10,7 +10,7 @@ O projeto foi desenvolvido para atender o desafio final do programa OmegaTech. F
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
 ```
-https://github.com/Michelosc/omegaTech-backend.git
+git clone https://github.com/Michelosc/omegaTech-backend.git
 ```
 
 ### 📋 Pré-requisitos
