@@ -1,35 +1,23 @@
 # Projeto Final Omega Tech
 
+# Sobre o projeto
+
 O projeto foi desenvolvido para atender o desafio final do programa Omega Tech. O projeto consiste em uma calculadora de proposta para serviço de prestação de energia.
 
 # Jornada do projeto
 O projeto foi desenvolvido para atender o desafio final do programa OmegaTech. Foi acordado com os membros da equipe que, como alguns não possuiam conhecimento técnico no back-end o membro Michel ficou responsável por atender essa parte do projeto desenvolvendo suas funcionalidades. Enquanto os outros membros ficaram responsáveis pelo front-end. 
 
-## 🚀 Começando
-
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+## Como executar o projeto
+Pré-requisitos: npm
 
 ```
+# clonar repositório
 git clone https://github.com/Michelosc/omegaTech-backend.git
-```
 
-### 📋 Pré-requisitos
-
-De que coisas você precisa para instalar o software e como instalá-lo?
-
-```
-Git
-NodeJs
-```
-
-### 🔧 Instalação
-
-Para instalar as dependências do projeto você precisa rodar o comando:
-
-```
+# instalar dependências
 npm install
-```
 
+```
 
 ## 🛠️ Construído com
 
