@@ -37,7 +37,7 @@ Mencione as ferramentas que você usou para criar seu projeto
 
 * [NestJs](http://https://nestjs.com/) - O framework web usado
 * [npm](https://https://www.npmjs.com/) - Gerente de Dependência
-* .[momentjs].(https://momentjs.com/) - Biblioteca para manipulação de datas
+* [momentjs](https://momentjs.com/) - Biblioteca para manipulação de datas
 
 
 ## 🖇️ Colaborando
