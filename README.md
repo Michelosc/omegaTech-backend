@@ -14,6 +14,9 @@ Pré-requisitos: npm
 # clonar repositório
 git clone https://github.com/Michelosc/omegaTech-backend.git
 
+# entrar na pasta do projeto
+cd omegaTech-backend
+
 # instalar dependências
 npm install
 
@@ -21,11 +24,12 @@ npm install
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
-
 * [NestJs](http://https://nestjs.com/) - O framework web usado
 * [npm](https://https://www.npmjs.com/) - Gerente de Dependência
 * [momentjs](https://momentjs.com/) - Biblioteca para manipulação de datas
+* [passportjs](http://www.passportjs.org/) - Passport é um middleware de autenticação para Node.js
+* [bcrypt](https://www.npmjs.com/package/bcrypt) - Biblioteca para para criar hashes de senhas
+* [swagger](https://swagger.io/) - Ferramenta para documentação de Apis
 
 
 ## 🖇️ Colaborando
